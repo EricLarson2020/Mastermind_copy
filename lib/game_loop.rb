@@ -1,4 +1,5 @@
 require './lib/sequence'
+require 'pry'
 class GameLoop
   attr_reader :guess, :answer
 
@@ -45,7 +46,7 @@ class GameLoop
           Do you want to (p)lay again or (q)uit?"
           print "> "
           winner_statement = gets.chomp.downcase
-            if winner_statement == 'q' || winner_statement == 'quit'
+            if winner_statement == 'q' || winner_statement == 'quit' #break in seperate methods
               puts "Thanks for playing!"
               @game_over = true
             elsif winner_statement == 'p' || winner_statement == 'play'
@@ -81,6 +82,15 @@ class GameLoop
 
   def compare_correct_amount
 
+    #I would probably put this in a guess class
+    #That would make the guess functionality much eaisier to test, as you can control
+    #what is passed into the code
+
+    #the below is taking up a ton of space making 8-arrays, a better method is to use a hash
+    #with keys as the letters, and the values consisting of an array of values
+
+    #I would probably make a cheat class as well using the same concept
+
     answer_reds= []
     answer_greens = []
     answer_blues = []
@@ -93,7 +103,7 @@ class GameLoop
 
     number_correct = 0
 
-
+    binding.pry
     @answer.find_all do |answer|
       if answer == 'r'
         answer_reds << answer
